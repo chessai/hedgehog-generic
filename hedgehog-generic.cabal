@@ -35,9 +35,10 @@ library
   hs-source-dirs:
     src
   exposed-modules:
-    HedgehogGeneric
+    Hedgehog.Generic
   build-depends:
     , base >= 4.10.1.0 && < 4.13
+    , hedgehog >= 0.1 && < 0.7
   ghc-options:
     -Wall
     -O2
