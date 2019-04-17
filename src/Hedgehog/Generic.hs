@@ -1,6 +1,5 @@
 {-# language DataKinds #-}
 {-# language FlexibleContexts #-}
-{-# language InstanceSigs #-}
 {-# language ScopedTypeVariables #-}
 {-# language TypeFamilies #-}
 {-# language TypeOperators #-}
@@ -12,7 +11,7 @@ module Hedgehog.Generic
   ) where
 
 import Control.Applicative (liftA2)
-import Data.Proxy
+import Data.Proxy (Proxy(..))
 import GHC.Generics
 import GHC.TypeLits
 import Hedgehog
@@ -24,7 +23,6 @@ class HGen a where
 instance HGen U1 where
   hgen' = pure U1
 
--- Does this work..?
 instance (Generic c, HGen (Rep c)) => HGen (K1 i c) where
   hgen' = K1 <$> hgen
 
