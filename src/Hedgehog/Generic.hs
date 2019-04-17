@@ -5,6 +5,26 @@
 {-# language TypeOperators #-}
 {-# language UndecidableInstances #-}
 
+{- |
+
+Generic implementation of a generator. Example usage:
+
+@
+data Foo = Foo
+  { _fooX :: X
+  , _fooY :: Y
+  } deriving (Generic)
+
+genFoo :: Gen Foo
+genFoo = hgen
+@
+
+The generated generator is equivalent to
+
+@Foo \<$\> hgen \<*\> hgen@.
+
+-}
+
 module Hedgehog.Generic
   ( HGen(..)
   , hgen
@@ -17,6 +37,7 @@ import GHC.TypeLits
 import Hedgehog
 import qualified Hedgehog.Gen as Gen
 
+-- | A class used to generate generators for types implementing 'Generic'.
 class HGen a where
   hgen' :: Gen (a x)
 
@@ -47,5 +68,7 @@ type family SumLen a :: Nat where
   SumLen (a :+: b) = SumLen a + SumLen b
   SumLen _ = 1
 
+-- | If your type implements 'Generic', you can get a generator for
+--   your type 'for free' using this function.
 hgen :: (Generic a, HGen (Rep a)) => Gen a
 hgen = to <$> hgen'
