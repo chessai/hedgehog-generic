@@ -29,7 +29,7 @@ extra-doc-files:
     README.md
   , CHANGELOG.md
 tested-with:
-  GHC == 8.2.2, GHC == 8.4.4, GHC == 8.6.4
+  GHC == 8.2.2, GHC == 8.4.4, GHC == 8.6.5, GHC == 8.8.1
 
 library
   hs-source-dirs:
@@ -37,8 +37,8 @@ library
   exposed-modules:
     Hedgehog.Generic
   build-depends:
-    , base >= 4.10.1.0 && < 4.13
-    , hedgehog >= 0.1 && < 0.7
+    , base >= 4.10.1.0 && < 4.14
+    , hedgehog >= 0.1 && < 1.1
   ghc-options:
     -Wall
   default-language:
